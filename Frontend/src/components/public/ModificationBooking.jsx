@@ -1,17 +1,17 @@
+import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../common/customer/Navbar";
-import Footer from "../common/customer/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { format } from "date-fns";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import Footer from "../common/customer/Footer";
+import Navbar from "../common/customer/Navbar";
 
 // Load Stripe publishable key
-const stripePromise = loadStripe("pk_test_51Rj36I4CYapQbNJ7tHDHQotrP52b6bjDWYPAK2oWG3D6qV1KqTFe1KdR4vvOBNQj7YeTbuczIW6tkEjl9I9GjU7u006oU4VbKf");
+const stripePromise = loadStripe("Stripe_publishable_key");
 
 // Color code to name mapping
 const colorCodeToName = {
@@ -182,9 +182,8 @@ function StripeForm({ customization, shippingAddress, paymentMethod, customerId,
       <div className="flex justify-center">
         <button
           type="submit"
-          className={`bg-[#FF4500] w-[200px] text-white px-6 py-2 rounded hover:bg-orange-600 ${
-            isProcessing || !stripe || !clientSecret ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`bg-[#FF4500] w-[200px] text-white px-6 py-2 rounded hover:bg-orange-600 ${isProcessing || !stripe || !clientSecret ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           disabled={isProcessing || !stripe || !clientSecret}
         >
           {isProcessing ? "Processing..." : "Pay"}
@@ -371,9 +370,8 @@ export default function ModificationBooking() {
           {[1, 2, 3].map((s, index) => (
             <div key={s} className="flex items-center flex-1">
               <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full text-lg font-bold ${
-                  step >= s ? "bg-[#FF4500] text-white" : "bg-[#1E1E1E] border border-gray-500 text-gray-400"
-                }`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full text-lg font-bold ${step >= s ? "bg-[#FF4500] text-white" : "bg-[#1E1E1E] border border-gray-500 text-gray-400"
+                  }`}
               >
                 {s}
               </div>
@@ -567,9 +565,8 @@ export default function ModificationBooking() {
             </div>
             <button
               onClick={handleNextStep}
-              className={`bg-[#FF4500] px-4 py-2 rounded-md  text-white w-48 mx-auto block mt-8 ${
-                isProcessing || mutation.isLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`bg-[#FF4500] px-4 py-2 rounded-md  text-white w-48 mx-auto block mt-8 ${isProcessing || mutation.isLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               disabled={isProcessing || mutation.isLoading}
             >
               {paymentMethod === "Stripe" ? "Next" : mutation.isLoading ? "Booking..." : "Book Modification"}
